@@ -25,8 +25,14 @@ jobs:
         with:
           python-version: "3.9"
 
-      - name: Install dependencies
-        run: pip install -r docker/requirements.txt
+      - name: install poetry (for pyproject.toml)
+        run: pip install poetry
+        
+      - name: Install python dependencies (for pyproject.toml)
+        run: poetry install --no-root
+
+      # - name: Install dependencies (Install without Poetry)
+      #   run: pip install -r docker/requirements.txt
 
       - name: Cleanup PSE
         if: always()
